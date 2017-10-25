@@ -271,20 +271,6 @@ class LogManagerTest {
     verifyCheckpointRecovery(Seq(new TopicPartition("test-a", 1)), logManager)
   }
 
-  /**
-   * Test that recovery points directory checking works with relative directory
-   */
-  @Test
-  def testRecoveryDirectoryMappingWithRelativeDirectory() {
-    logManager.shutdown()
-    logDir = new File("data" + File.separator + logDir.getName)
-    logDir.mkdirs()
-    logDir.deleteOnExit()
-    logManager = createLogManager()
-    logManager.startup()
-    verifyCheckpointRecovery(Seq(new TopicPartition("test-a", 1)), logManager)
-  }
-
 
   private def verifyCheckpointRecovery(topicPartitions: Seq[TopicPartition],
                                        logManager: LogManager) {
